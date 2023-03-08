@@ -1,0 +1,61 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.example.demo.model.Worker;
+import com.example.demo.service.WorkerService;
+@RestController
+@CrossOrigin
+public class WorkerController {
+	@Autowired
+	WorkerService service;
+	
+	@PostMapping("/worker")
+	public String add(@RequestBody Worker worker)
+	{
+		return service.addWorker(worker);
+	}
+	@GetMapping("/worker")
+	public List<Worker> get()
+	{
+		return service.getWorker();
+	}
+	@GetMapping("/worker/{field}")
+	public List<Worker> babyWithSort(@PathVariable String field)
+	{
+		return service.getWorkerSorted(field);
+	}
+	@PutMapping("/worker")
+	public String update(@RequestBody Worker worker)
+	{
+		return service.updateWorker(worker);
+	}
+	
+	@DeleteMapping("/worker")
+		public String delete(@RequestParam int id)
+		{
+		return service.deleteWorkerById(id);
+		}
+	@GetMapping("/worker/{offset}/{pageSize}")
+	public List<Worker> WorkerWithPagination(@PathVariable int offset,@PathVariable int pageSize)
+	{
+		return service.getWorkerWithPagination(offset, pageSize );
+	}
+	@GetMapping("/worker/{offset}/{pageSize}/{field}")
+	public List<Worker> WorkerWithSortingAndPagination(@PathVariable int offset,@PathVariable int pageSize,@PathVariable String field)
+	{
+		return service.getWorkerWithSortingAndPagination(offset, pageSize,field);
+	}
+}

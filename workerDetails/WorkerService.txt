@@ -1,0 +1,52 @@
+package com.example.demo.service;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.model.Worker;
+import com.example.demo.repository.WorkerRepository;
+@Service
+public class WorkerService {
+	@Autowired
+	WorkerRepository repository;
+	public String addWorker(Worker worker) 
+	{
+		repository.save(worker);
+		return "Worker is Added";
+	}
+	
+	public List<Worker> getWorker()
+	{
+		return repository.findAll();
+	}
+	public String updateWorker(Worker worker)
+	{
+		repository.save(worker);
+		return " Worker is Updated ";
+	}
+	public String deleteWorkerById(int id) {
+	    repository.deleteById(id);
+	    return "Worker Removed";
+	}
+	public List<Worker> getWorkerSorted(String field)
+	{
+		return repository.findAll(Sort.by(Sort.Direction.ASC, field));
+	}
+	public List<Worker> getWorkerWithPagination(@PathVariable int offset, @PathVariable int pageSize)
+	{
+		Page<Worker> page=repository.findAll(PageRequest.of(offset,pageSize));
+		return page.getContent();
+	}
+	public List<Worker> getWorkerWithSortingAndPagination(int offset,int pageSize,String field)
+	{
+		Pageable paging = PageRequest.of(offset,pageSize,Sort.by(field));
+		Page<Worker> page=repository.findAll(paging);
+		return page.getContent();
+}
+}

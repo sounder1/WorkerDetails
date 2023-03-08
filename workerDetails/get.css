@@ -1,0 +1,19 @@
+#box{
+    color: rgb(236, 220, 196);
+    background-attachment: fixed; 
+    background-color: rgb(34, 164, 66);
+    margin-top: 20px;
+    width: 1000px;
+    top:50px;
+    margin-left: 120px;
+}
+body{
+    background-color: grey;
+}
+th {
+    border: 1px solid white;
+}
+
+td {
+    border: 1px solid white;
+}

@@ -1,0 +1,14 @@
+#form{
+    text-align: center;
+    color: rgb(236, 220, 196);
+    background-attachment: fixed; 
+    background-color: rgb(255, 132, 0);
+}
+#form h1{
+    text-transform: uppercase;
+    font-family:bold;
+    color:black;
+}
+#form button{
+    color:greenyellow;
+}
